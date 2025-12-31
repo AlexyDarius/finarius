@@ -385,70 +385,70 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Test validation
 
 ### 4.3 Transactions Management UI
-- [ ] Create `finarius_app/ui/transactions.py`
-  - [ ] `render_transactions_page()` function
-    - [ ] Display transactions table
-      - [ ] Date
-      - [ ] Account
-      - [ ] Type
-      - [ ] Symbol
-      - [ ] Quantity
-      - [ ] Price
-      - [ ] Fee
-      - [ ] Total
-      - [ ] Actions (Edit, Delete)
-    - [ ] Filtering options
-      - [ ] By account
-      - [ ] By date range
-      - [ ] By symbol
-      - [ ] By type
-    - [ ] Sorting options
-    - [ ] Pagination (if needed)
-    - [ ] Export to CSV option
+- [✅] Create `finarius_app/ui/transactions.py`
+  - [✅] `render_transactions_page()` function
+    - [✅] Display transactions table
+      - [✅] Date
+      - [✅] Account
+      - [✅] Type
+      - [✅] Symbol
+      - [✅] Quantity
+      - [✅] Price
+      - [✅] Fee
+      - [✅] Total
+      - [✅] Actions (Edit, Delete)
+    - [✅] Filtering options
+      - [✅] By account
+      - [✅] By date range
+      - [✅] By symbol
+      - [✅] By type
+    - [✅] Sorting options
+    - [✅] Pagination (if needed)
+    - [✅] Export to CSV option
 
-- [ ] Create transaction form
-  - [ ] `render_transaction_form()` function
-    - [ ] Account selector
-    - [ ] Date picker
-    - [ ] Type selector (BUY, SELL, DIVIDEND, DEPOSIT, WITHDRAW)
-    - [ ] Symbol input (with autocomplete/validation)
-      - [ ] Show current price when symbol entered
-    - [ ] Quantity input
-    - [ ] Price input (auto-fill from market if available)
-    - [ ] Fee input
-    - [ ] Notes textarea
-    - [ ] Validation
-      - [ ] Required fields
-      - [ ] Positive quantities
-      - [ ] Valid dates
-      - [ ] Symbol validation
-    - [ ] Submit button
-    - [ ] Cancel button
+- [✅] Create transaction form
+  - [✅] `render_transaction_form()` function
+    - [✅] Account selector
+    - [✅] Date picker
+    - [✅] Type selector (BUY, SELL, DIVIDEND, DEPOSIT, WITHDRAW)
+    - [✅] Symbol input (with autocomplete/validation)
+      - [✅] Show current price when symbol entered
+    - [✅] Quantity input
+    - [✅] Price input (auto-fill from market if available)
+    - [✅] Fee input
+    - [✅] Notes textarea
+    - [✅] Validation
+      - [✅] Required fields
+      - [✅] Positive quantities
+      - [✅] Valid dates
+      - [✅] Symbol validation
+    - [✅] Submit button
+    - [✅] Cancel button
 
-- [ ] Add transaction editing
-  - [ ] Edit form (pre-filled)
-  - [ ] Update functionality
-  - [ ] Validation
+- [✅] Add transaction editing
+  - [✅] Edit form (pre-filled)
+  - [✅] Update functionality
+  - [✅] Validation
 
-- [ ] Add transaction deletion
-  - [ ] Delete confirmation
-  - [ ] Cascade handling (if needed)
+- [✅] Add transaction deletion
+  - [✅] Delete confirmation
+  - [✅] Cascade handling (if needed)
 
-- [ ] Add bulk import
-  - [ ] CSV import form
-  - [ ] File upload
-  - [ ] CSV parsing
-  - [ ] Validation
-  - [ ] Preview before import
-  - [ ] Import execution
-  - [ ] Error reporting
+- [✅] Add bulk import
+  - [✅] CSV import form
+  - [✅] File upload
+  - [✅] CSV parsing
+  - [✅] Validation
+  - [✅] Preview before import
+  - [✅] Import execution
+  - [✅] Error reporting
 
-- [ ] Write tests for transactions UI
-  - [ ] Test transaction creation
-  - [ ] Test transaction editing
-  - [ ] Test transaction deletion
-  - [ ] Test filtering
-  - [ ] Test CSV import
+- [✅] Write tests for transactions UI
+  - [✅] Test transaction creation
+  - [✅] Test transaction editing
+  - [✅] Test transaction deletion
+  - [✅] Test filtering
+  - [✅] Test CSV import
 
 ### 4.4 Dashboard UI
 - [ ] Create `finarius_app/ui/dashboard.py`
