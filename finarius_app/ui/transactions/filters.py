@@ -49,8 +49,7 @@ def render_filters(accounts: List[Account], db) -> dict:
         start_date = date_range[0] if isinstance(date_range, tuple) else date_range
         end_date = date_range[1] if isinstance(date_range, tuple) else date.today()
         
-        # Update session state
-        st.session_state[date_range_key] = (start_date, end_date)
+        # Note: Don't update session_state here - the widget handles it automatically
     
     with col3:
         # Symbol filter
