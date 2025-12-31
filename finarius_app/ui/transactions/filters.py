@@ -31,14 +31,26 @@ def render_filters(accounts: List[Account], db) -> dict:
             account_id = int(selected_account.split("(ID: ")[1].split(")")[0])
     
     with col2:
-        # Date range filter
+        # Date range filter - default to wider range (1 year) to show more transactions
+        # This ensures transactions from earlier dates are visible by default
+        default_start_date = date.today() - timedelta(days=365)
+        
+        # Use session state to remember user's date range preference
+        date_range_key = "transaction_date_range"
+        if date_range_key not in st.session_state:
+            st.session_state[date_range_key] = (default_start_date, date.today())
+        
         date_range = st.date_input(
             "Date Range",
-            value=(date.today() - timedelta(days=30), date.today()),
-            max_value=date.today()
+            value=st.session_state[date_range_key],
+            max_value=date.today(),
+            key=date_range_key
         )
         start_date = date_range[0] if isinstance(date_range, tuple) else date_range
         end_date = date_range[1] if isinstance(date_range, tuple) else date.today()
+        
+        # Update session state
+        st.session_state[date_range_key] = (start_date, end_date)
     
     with col3:
         # Symbol filter
