@@ -12,6 +12,11 @@ def initialize_session_state() -> None:
     if "db" not in st.session_state:
         st.session_state.db = None
 
+    # Selected page (for navigation)
+    if "selected_page" not in st.session_state:
+        from finarius_app.ui.navigation import PAGE_DASHBOARD
+        st.session_state.selected_page = PAGE_DASHBOARD
+
     # Selected account (for filtering)
     if "selected_account_id" not in st.session_state:
         st.session_state.selected_account_id = None

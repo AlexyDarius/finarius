@@ -60,15 +60,25 @@ def render_sidebar() -> str:
     if "selected_page" not in st.session_state:
         st.session_state.selected_page = PAGE_DASHBOARD
 
-    # Render navigation menu
+    # Get current page from session state
+    current_page = st.session_state.selected_page
+    
+    # Ensure current_page is valid
+    if current_page not in PAGES:
+        current_page = PAGE_DASHBOARD
+        st.session_state.selected_page = current_page
+
+    # Render navigation menu with key to properly track state
+    # Use the key parameter to ensure Streamlit properly tracks the widget state
     selected_page = st.sidebar.radio(
         "Navigation",
         options=list(PAGES.keys()),
         format_func=lambda key: f"{PAGES[key]['icon']} {PAGES[key]['title']}",
-        index=list(PAGES.keys()).index(st.session_state.selected_page),
+        index=list(PAGES.keys()).index(current_page),
+        key="navigation_radio",
     )
 
-    # Update session state
+    # Always update session state to keep it in sync with the radio button
     st.session_state.selected_page = selected_page
 
     # Show page description
