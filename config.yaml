@@ -1,0 +1,38 @@
+# Finarius Configuration File
+# This file contains default configuration values for the Finarius application.
+# You can override these values using environment variables (see README for details).
+
+# Database configuration
+database:
+  # Path to SQLite database file
+  path: "db.sqlite"
+
+# Display settings
+display:
+  # Default currency for displaying values (ISO 4217 code)
+  default_currency: "USD"
+  # Date format string (Python strftime format)
+  date_format: "%Y-%m-%d"
+  # Number format string (Python format string)
+  number_format: "{:,.2f}"
+
+# Price update settings
+prices:
+  # Update frequency: "daily", "weekly", or "manual"
+  update_frequency: "daily"
+  # Enable price caching
+  cache_enabled: true
+  # Cache expiry in days
+  cache_expiry_days: 1
+
+# Logging configuration
+logging:
+  # Log level: "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"
+  level: "INFO"
+  # Log format string
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  # Enable file logging
+  file_enabled: false
+  # Path to log file (if file_enabled is true)
+  file_path: "finarius.log"
+

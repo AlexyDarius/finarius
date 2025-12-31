@@ -3,6 +3,7 @@
 from . import prices
 from . import engine
 from . import metrics
+from .config import Config
 
-__all__ = ["prices", "engine", "metrics"]
+__all__ = ["prices", "engine", "metrics", "Config"]
 
