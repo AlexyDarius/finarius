@@ -8,9 +8,9 @@ from finarius_app.core.models import Transaction, Account
 from finarius_app.ui.transactions import (
     render_transactions_page,
     TRANSACTION_TYPES,
-    _get_filtered_transactions,
-    _generate_csv,
 )
+from finarius_app.ui.transactions.filters import get_filtered_transactions
+from finarius_app.ui.transactions.csv import generate_csv
 
 
 class TestTransactionsUI:
@@ -26,8 +26,8 @@ class TestTransactionsUI:
         assert "DEPOSIT" in TRANSACTION_TYPES
         assert "WITHDRAW" in TRANSACTION_TYPES
 
-    @patch("finarius_app.ui.transactions.get_db")
-    @patch("finarius_app.ui.transactions.st")
+    @patch("finarius_app.ui.transactions.page.get_db")
+    @patch("finarius_app.ui.transactions.page.st")
     def test_render_transactions_page_no_db(self, mock_st, mock_get_db):
         """Test rendering transactions page when database is not initialized."""
         mock_get_db.return_value = None
@@ -39,9 +39,9 @@ class TestTransactionsUI:
         mock_st.error.assert_called_once_with("Database not initialized")
         mock_st.title.assert_called_once_with("💸 Transactions")
 
-    @patch("finarius_app.ui.transactions.get_all_accounts")
-    @patch("finarius_app.ui.transactions.get_db")
-    @patch("finarius_app.ui.transactions.st")
+    @patch("finarius_app.ui.transactions.page.get_all_accounts")
+    @patch("finarius_app.ui.transactions.page.get_db")
+    @patch("finarius_app.ui.transactions.page.st")
     def test_render_transactions_page_no_accounts(self, mock_st, mock_get_db, mock_get_all_accounts):
         """Test rendering transactions page with no accounts."""
         mock_db = MagicMock()
@@ -56,12 +56,13 @@ class TestTransactionsUI:
         mock_st.warning.assert_called_once()
         mock_get_all_accounts.assert_called_once_with(mock_db)
 
-    @patch("finarius_app.ui.transactions.get_all_accounts")
-    @patch("finarius_app.ui.transactions.get_transactions_by_account")
-    @patch("finarius_app.ui.transactions.get_db")
-    @patch("finarius_app.ui.transactions.st")
+    @patch("finarius_app.ui.transactions.page.get_all_accounts")
+    @patch("finarius_app.ui.transactions.filters.get_transactions_by_account")
+    @patch("finarius_app.ui.transactions.page.get_db")
+    @patch("finarius_app.ui.transactions.filters.st")
+    @patch("finarius_app.ui.transactions.page.st")
     def test_render_transactions_page_with_accounts(
-        self, mock_st, mock_get_db, mock_get_transactions, mock_get_all_accounts
+        self, mock_st_page, mock_st_filters, mock_get_db, mock_get_transactions, mock_get_all_accounts
     ):
         """Test rendering transactions page with accounts."""
         mock_db = MagicMock()
@@ -71,21 +72,23 @@ class TestTransactionsUI:
         mock_get_all_accounts.return_value = [account]
         mock_get_transactions.return_value = []
         
-        mock_st.title = MagicMock()
-        mock_st.markdown = MagicMock()
-        mock_st.subheader = MagicMock()
-        mock_st.columns = MagicMock(side_effect=[
-            [MagicMock(), MagicMock(), MagicMock(), MagicMock()],  # For filters
-            [MagicMock(), MagicMock(), MagicMock()],  # For action buttons
-        ])
-        mock_st.selectbox = MagicMock(return_value="All Accounts")
-        mock_st.date_input = MagicMock(return_value=(date.today() - timedelta(days=30), date.today()))
-        mock_st.text_input = MagicMock(return_value="")
-        mock_st.info = MagicMock()
-        mock_st.button = MagicMock(return_value=False)
-        mock_st.download_button = MagicMock()
-        mock_st.session_state = {}
-        mock_st.dataframe = MagicMock()
+        # Setup filters st mock
+        mock_st_filters.subheader = MagicMock()
+        mock_st_filters.columns = MagicMock(return_value=[MagicMock(), MagicMock(), MagicMock(), MagicMock()])
+        mock_st_filters.selectbox = MagicMock(return_value="All Accounts")
+        mock_st_filters.date_input = MagicMock(return_value=(date.today() - timedelta(days=30), date.today()))
+        mock_st_filters.text_input = MagicMock(return_value="")
+        
+        # Setup page st mock
+        mock_st_page.title = MagicMock()
+        mock_st_page.markdown = MagicMock()
+        mock_st_page.subheader = MagicMock()
+        mock_st_page.columns = MagicMock(return_value=[MagicMock(), MagicMock(), MagicMock()])
+        mock_st_page.download_button = MagicMock()
+        mock_st_page.info = MagicMock()
+        mock_st_page.button = MagicMock(return_value=False)
+        mock_st_page.session_state = {}
+        mock_st_page.dataframe = MagicMock()
 
         render_transactions_page()
 
@@ -115,7 +118,7 @@ class TestTransactionsUI:
             price=200.0
         )
         
-        with patch("finarius_app.ui.transactions.get_transactions_by_account") as mock_get:
+        with patch("finarius_app.ui.transactions.filters.get_transactions_by_account") as mock_get:
             mock_get.return_value = [transaction1]
             
             filters = {
@@ -126,7 +129,7 @@ class TestTransactionsUI:
                 "type": None,
             }
             
-            result = _get_filtered_transactions(filters, mock_db)
+            result = get_filtered_transactions(filters, mock_db)
             
             assert len(result) == 1
             assert result[0].account_id == 1
@@ -160,11 +163,11 @@ class TestTransactionsUI:
             "type": None,
         }
         
-        with patch("finarius_app.ui.transactions.get_transactions_by_account") as mock_get_txns:
+        with patch("finarius_app.ui.transactions.filters.get_transactions_by_account") as mock_get_txns:
             # Return both transactions when called for the account
             mock_get_txns.return_value = [transaction1, transaction2]
             
-            result = _get_filtered_transactions(filters, mock_db)
+            result = get_filtered_transactions(filters, mock_db)
             
             # Filtering by symbol happens after getting all transactions
             # The filter checks: t.symbol and t.symbol.upper() == filters["symbol"]
@@ -200,11 +203,11 @@ class TestTransactionsUI:
             "type": "BUY",
         }
         
-        with patch("finarius_app.ui.transactions.get_transactions_by_account") as mock_get_txns:
+        with patch("finarius_app.ui.transactions.filters.get_transactions_by_account") as mock_get_txns:
             # Return both transactions when called for the account
             mock_get_txns.return_value = [transaction1, transaction2]
             
-            result = _get_filtered_transactions(filters, mock_db)
+            result = get_filtered_transactions(filters, mock_db)
             
             # Filtering by type happens after getting all transactions
             # The filter checks: t.type == filters["type"]
@@ -227,7 +230,7 @@ class TestTransactionsUI:
             )
         ]
         
-        csv_data = _generate_csv(transactions)
+        csv_data = generate_csv(transactions)
         
         assert "ID" in csv_data
         assert "Date" in csv_data
