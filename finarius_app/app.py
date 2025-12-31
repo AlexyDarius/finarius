@@ -1,9 +1,9 @@
 """Main Streamlit application entry point."""
 
-import logging
 import streamlit as st
 
 from finarius_app.core.database import init_db
+from finarius_app.core.logger import setup_logging, get_logger
 from finarius_app.ui import (
     render_sidebar,
     initialize_session_state,
@@ -27,12 +27,9 @@ from finarius_app.ui.dashboard import render_dashboard_page
 from finarius_app.ui.analytics import render_analytics_page
 from finarius_app.ui.settings import render_settings_page
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
-logger = logging.getLogger(__name__)
+# Configure logging (uses config.yaml or environment variables)
+setup_logging()
+logger = get_logger(__name__)
 
 # Configure Streamlit page settings
 st.set_page_config(
