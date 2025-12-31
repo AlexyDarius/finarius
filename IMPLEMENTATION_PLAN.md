@@ -550,26 +550,26 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Test chart rendering
 
 ### 4.6 Settings & Configuration UI
-- [ ] Create `finarius_app/ui/settings.py`
-  - [ ] `render_settings_page()` function
-    - [ ] Database settings
-      - [ ] Database path
-      - [ ] Backup database button
-      - [ ] Restore database button
-      - [ ] Vacuum database button
-    - [ ] Price update settings
-      - [ ] Auto-update frequency
-      - [ ] Manual update button
-      - [ ] Update all prices button
-    - [ ] Display settings
-      - [ ] Default currency
-      - [ ] Date format
-      - [ ] Number format
-    - [ ] Export/Import settings
-      - [ ] Export data button
-      - [ ] Import data button
+- [✅] Create `finarius_app/ui/settings/` package
+  - [✅] `render_settings_page()` function
+    - [✅] Database settings
+      - [✅] Database path
+      - [✅] Backup database button
+      - [✅] Restore database button
+      - [✅] Vacuum database button
+    - [✅] Price update settings
+      - [✅] Auto-update frequency
+      - [✅] Manual update button
+      - [✅] Update all prices button
+    - [✅] Display settings
+      - [✅] Default currency
+      - [✅] Date format
+      - [✅] Number format
+    - [✅] Export/Import settings
+      - [✅] Export data button
+      - [✅] Import data button
 
-- [ ] Write tests for settings UI
+- [✅] Write tests for settings UI
 
 ---
 

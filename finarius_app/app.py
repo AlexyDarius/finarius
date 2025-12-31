@@ -25,6 +25,7 @@ from finarius_app.ui.accounts import render_accounts_page
 from finarius_app.ui.transactions import render_transactions_page
 from finarius_app.ui.dashboard import render_dashboard_page
 from finarius_app.ui.analytics import render_analytics_page
+from finarius_app.ui.settings import render_settings_page
 
 # Configure logging
 logging.basicConfig(
@@ -103,10 +104,7 @@ def render_portfolio_page() -> None:
 # render_analytics_page is imported from finarius_app.ui.analytics
 
 
-def render_settings_page() -> None:
-    """Render settings page (placeholder)."""
-    st.title("⚙️ Settings")
-    st.info("🚧 Settings page coming soon!")
+# render_settings_page is imported from finarius_app.ui.settings
 
 
 def main() -> None:

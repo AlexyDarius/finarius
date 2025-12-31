@@ -31,6 +31,7 @@ from .accounts import render_accounts_page
 from .transactions import render_transactions_page
 from .dashboard import render_dashboard_page
 from .analytics import render_analytics_page
+from .settings import render_settings_page
 
 __all__ = [
     # Navigation
@@ -65,5 +66,7 @@ __all__ = [
     "render_dashboard_page",
     # Analytics UI
     "render_analytics_page",
+    # Settings UI
+    "render_settings_page",
 ]
 
