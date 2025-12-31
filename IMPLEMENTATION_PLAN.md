@@ -509,45 +509,45 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Test filtering
 
 ### 4.5 Portfolio Analytics UI
-- [ ] Create `finarius_app/ui/analytics.py`
-  - [ ] `render_analytics_page()` function
-    - [ ] Date range selector
-    - [ ] Account selector
+- [✅] Create `finarius_app/ui/analytics/` package
+  - [✅] `render_analytics_page()` function
+    - [✅] Date range selector
+    - [✅] Account selector
 
-- [ ] Performance analytics section
-  - [ ] Performance metrics table
-    - [ ] CAGR
-    - [ ] IRR
-    - [ ] TWRR
-    - [ ] Total return
-    - [ ] Volatility
-  - [ ] Performance comparison chart
-  - [ ] Rolling returns chart
+- [✅] Performance analytics section
+  - [✅] Performance metrics table
+    - [✅] CAGR
+    - [✅] IRR
+    - [✅] TWRR
+    - [✅] Total return
+    - [✅] Volatility
+  - [✅] Performance comparison chart
+  - [✅] Rolling returns chart
 
-- [ ] Gains/losses analysis
-  - [ ] Realized gains breakdown
-    - [ ] By symbol
-    - [ ] By date
-    - [ ] Chart
-  - [ ] Unrealized gains breakdown
-    - [ ] By symbol
-    - [ ] Chart
-  - [ ] Combined PnL chart
+- [✅] Gains/losses analysis
+  - [✅] Realized gains breakdown
+    - [✅] By symbol
+    - [✅] By date
+    - [✅] Chart
+  - [✅] Unrealized gains breakdown
+    - [✅] By symbol
+    - [✅] Chart
+  - [✅] Combined PnL chart
 
-- [ ] Dividend analytics section
-  - [ ] Dividend income over time
-  - [ ] Dividend by symbol
-  - [ ] Dividend yield trends
-  - [ ] Dividend calendar (if applicable)
+- [✅] Dividend analytics section
+  - [✅] Dividend income over time
+  - [✅] Dividend by symbol
+  - [✅] Dividend yield trends
+  - [✅] Dividend calendar (if applicable)
 
-- [ ] Position analytics
-  - [ ] Position size analysis
-  - [ ] Concentration risk
-  - [ ] Diversification metrics
+- [✅] Position analytics
+  - [✅] Position size analysis
+  - [✅] Concentration risk
+  - [✅] Diversification metrics
 
-- [ ] Write tests for analytics UI
-  - [ ] Test analytics calculations
-  - [ ] Test chart rendering
+- [✅] Write tests for analytics UI
+  - [✅] Test analytics calculations
+  - [✅] Test chart rendering
 
 ### 4.6 Settings & Configuration UI
 - [ ] Create `finarius_app/ui/settings.py`
