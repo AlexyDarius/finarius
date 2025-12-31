@@ -6,6 +6,7 @@ from typing import Callable, Any, Optional
 import streamlit as st
 
 from finarius_app.ui.session_state import set_error_message
+from finarius_app.core.exceptions import FinariusException
 
 logger = logging.getLogger(__name__)
 
@@ -15,16 +16,29 @@ def handle_error(error: Exception, user_message: Optional[str] = None) -> None:
 
     Args:
         error: Exception that occurred.
-        user_message: User-friendly error message. If None, uses default message.
+        user_message: User-friendly error message. If None, generates message from exception.
     """
-    # Log detailed error
+    # Log detailed error with full traceback
     logger.error(f"Error occurred: {error}", exc_info=True)
 
     # Display user-friendly message
     if user_message:
         set_error_message(user_message)
+    elif isinstance(error, FinariusException):
+        # Use the exception's message which is already user-friendly
+        message = error.message
+        # Add helpful context from details if available
+        if error.details:
+            context_parts = []
+            if "symbol" in error.details:
+                context_parts.append(f"Symbol: {error.details['symbol']}")
+            if "field" in error.details:
+                context_parts.append(f"Field: {error.details['field']}")
+            if context_parts:
+                message += f" ({', '.join(context_parts)})"
+        set_error_message(message)
     else:
-        # Default user-friendly message
+        # Default user-friendly message for unknown exceptions
         error_type = type(error).__name__
         set_error_message(
             f"An error occurred: {error_type}. Please check the logs for details."
