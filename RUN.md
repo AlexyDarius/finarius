@@ -16,8 +16,12 @@
 **Option 2: Manual start**
 ```bash
 source venv/bin/activate
+# Ensure PYTHONPATH includes project root
+export PYTHONPATH="$(pwd):$PYTHONPATH"
 streamlit run finarius_app/app.py
 ```
+
+**Note:** The app automatically adds the project root to Python path, so it should work even without setting PYTHONPATH manually.
 
 **Option 3: Windows**
 ```bash
