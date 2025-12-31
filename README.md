@@ -12,6 +12,10 @@ A fully local, privacy-first portfolio tracking and analytics application simila
 - Dividend analytics
 - Interactive dashboards
 
+## Development
+
+See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for the detailed implementation plan with all tasks, checkboxes, and development phases.
+
 ## Tech Stack
 
 - **Language**: Python
