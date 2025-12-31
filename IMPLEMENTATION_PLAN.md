@@ -134,59 +134,59 @@ This document tracks the complete implementation of Finarius, a fully local, pri
 ## Phase 2: Market Data & Price Management
 
 ### 2.1 Price Downloader
-- [ ] Create `finarius_app/core/prices.py`
-  - [ ] Create `PriceDownloader` class
-    - [ ] Initialize with yfinance client
-    - [ ] Add rate limiting/throttling
-    - [ ] Add retry logic with exponential backoff
-    - [ ] Add error handling for network issues
-    - [ ] Add logging for download operations
+- [✅] Create `finarius_app/core/prices/` (modularized structure)
+  - [✅] Create `PriceDownloader` class (`downloader.py`)
+    - [✅] Initialize with yfinance client
+    - [✅] Add rate limiting/throttling
+    - [✅] Add retry logic with exponential backoff
+    - [✅] Add error handling for network issues
+    - [✅] Add logging for download operations
 
-- [ ] Implement price download functions
-  - [ ] `download_price(symbol, date)` - Download single price
-    - [ ] Handle missing data gracefully
-    - [ ] Handle invalid symbols
-    - [ ] Cache results
-  - [ ] `download_prices(symbol, start_date, end_date)` - Download price range
-    - [ ] Batch download optimization
-    - [ ] Handle date ranges efficiently
-    - [ ] Progress tracking
-  - [ ] `download_latest_price(symbol)` - Get current price
-    - [ ] Handle market hours
-    - [ ] Handle delayed data
-  - [ ] `download_multiple_symbols(symbols, start_date, end_date)` - Batch download
-    - [ ] Parallel downloads (if possible)
-    - [ ] Rate limit handling
+- [✅] Implement price download functions
+  - [✅] `download_price(symbol, date)` - Download single price
+    - [✅] Handle missing data gracefully
+    - [✅] Handle invalid symbols
+    - [✅] Cache results
+  - [✅] `download_prices(symbol, start_date, end_date)` - Download price range
+    - [✅] Batch download optimization
+    - [✅] Handle date ranges efficiently
+    - [✅] Progress tracking
+  - [✅] `download_latest_price(symbol)` - Get current price
+    - [✅] Handle market hours
+    - [✅] Handle delayed data
+  - [✅] `download_multiple_symbols(symbols, start_date, end_date)` - Batch download
+    - [✅] Sequential downloads with rate limiting
+    - [✅] Rate limit handling
 
-- [ ] Implement price caching
-  - [ ] Check database before downloading
-  - [ ] Cache downloaded prices to database
-  - [ ] Cache invalidation strategy
-  - [ ] Cache expiration (optional)
-  - [ ] `is_price_cached(symbol, date)` - Check cache
-  - [ ] `get_cached_price(symbol, date)` - Get from cache
-  - [ ] `update_price_cache(symbol, date, price_data)` - Update cache
+- [✅] Implement price caching (`cache.py`)
+  - [✅] Check database before downloading
+  - [✅] Cache downloaded prices to database
+  - [✅] Cache invalidation strategy
+  - [✅] Cache expiration (optional)
+  - [✅] `is_price_cached(symbol, date)` - Check cache
+  - [✅] `get_cached_price(symbol, date)` - Get from cache
+  - [✅] `update_price_cache(symbol, date, price_data)` - Update cache
 
-- [ ] Add symbol validation
-  - [ ] `validate_symbol(symbol)` - Validate symbol format
-  - [ ] `symbol_exists(symbol)` - Check if symbol is valid
-  - [ ] Handle different exchanges (NYSE, NASDAQ, etc.)
-  - [ ] Handle different asset types (stocks, ETFs, crypto, etc.)
+- [✅] Add symbol validation (`validation.py`)
+  - [✅] `validate_symbol(symbol)` - Validate symbol format
+  - [✅] `symbol_exists(symbol)` - Check if symbol is valid
+  - [✅] Handle different exchanges (NYSE, NASDAQ, etc.)
+  - [✅] Handle different asset types (stocks, ETFs, crypto, etc.)
 
-- [ ] Add price data normalization
-  - [ ] Handle different currencies
-  - [ ] Handle stock splits
-  - [ ] Handle dividends (adjust prices)
-  - [ ] Handle missing data points
+- [✅] Add price data normalization (`normalization.py`)
+  - [✅] Handle different currencies
+  - [✅] Handle stock splits
+  - [✅] Handle dividends (adjust prices)
+  - [✅] Handle missing data points
 
-- [ ] Write tests for price downloader
-  - [ ] Test single price download
-  - [ ] Test price range download
-  - [ ] Test caching mechanism
-  - [ ] Test error handling
-  - [ ] Test rate limiting
-  - [ ] Test symbol validation
-  - [ ] Mock yfinance for unit tests
+- [✅] Write tests for price downloader
+  - [✅] Test single price download
+  - [✅] Test price range download
+  - [✅] Test caching mechanism
+  - [✅] Test error handling
+  - [✅] Test rate limiting
+  - [✅] Test symbol validation
+  - [✅] Mock yfinance for unit tests
 
 ### 2.2 Price Management Utilities
 - [ ] Create price update scheduler
@@ -936,15 +936,15 @@ This document tracks the complete implementation of Finarius, a fully local, pri
 ## Progress Tracking
 
 **Last Updated:** 2025-01-27
-**Current Phase:** Phase 1 - Project Foundation & Database Setup
-**Current Step:** Phase 1 Complete - Ready for Phase 2
-**Overall Progress:** ~6% (Steps 1.1 and 1.2 completed)
+**Current Phase:** Phase 2 - Market Data & Price Management
+**Current Step:** Phase 2.1 Complete - Price Downloader implemented
+**Overall Progress:** ~10% (Steps 1.1, 1.2, and 2.1 completed)
 
 ### Quick Stats
 - Total Tasks: ~300+
-- Completed: ~20 (Steps 1.1 and 1.2 fully completed)
+- Completed: ~50 (Steps 1.1, 1.2, and 2.1 fully completed)
 - In Progress: 0
-- Not Started: ~280+
+- Not Started: ~250+
 
 ---
 
