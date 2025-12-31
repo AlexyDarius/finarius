@@ -23,6 +23,9 @@ else
     source venv/bin/activate
 fi
 
+# Set PYTHONPATH to include project root
+export PYTHONPATH="$SCRIPT_DIR:$PYTHONPATH"
+
 # Run Streamlit app
 echo "🚀 Starting Finarius..."
 echo "📍 App will be available at http://localhost:8501"
