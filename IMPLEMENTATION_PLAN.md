@@ -83,51 +83,51 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Test backup/restore
 
 ### 1.2 Database Models & ORM Layer
-- [ ] Create `finarius_app/core/models.py`
-  - [ ] Create `Account` model class
-    - [ ] `__init__()` constructor
-    - [ ] `save()` method
-    - [ ] `delete()` method
-    - [ ] `update()` method
-    - [ ] `to_dict()` method
-    - [ ] `from_dict()` class method
-    - [ ] Validation methods
-  - [ ] Create `Transaction` model class
-    - [ ] `__init__()` constructor
-    - [ ] `save()` method
-    - [ ] `delete()` method
-    - [ ] `update()` method
-    - [ ] `to_dict()` method
-    - [ ] `from_dict()` class method
-    - [ ] Validation methods (type, qty, price validation)
-    - [ ] `get_account()` method (relationship)
-  - [ ] Create `Price` model class
-    - [ ] `__init__()` constructor
-    - [ ] `save()` method
-    - [ ] `delete()` method
-    - [ ] `update()` method
-    - [ ] `to_dict()` method
-    - [ ] `from_dict()` class method
-    - [ ] Validation methods
+- [✅] Create `finarius_app/core/models/` (modularized structure)
+  - [✅] Create `Account` model class
+    - [✅] `__init__()` constructor
+    - [✅] `save()` method
+    - [✅] `delete()` method
+    - [✅] `update()` method
+    - [✅] `to_dict()` method
+    - [✅] `from_dict()` class method
+    - [✅] Validation methods
+  - [✅] Create `Transaction` model class
+    - [✅] `__init__()` constructor
+    - [✅] `save()` method
+    - [✅] `delete()` method
+    - [✅] `update()` method
+    - [✅] `to_dict()` method
+    - [✅] `from_dict()` class method
+    - [✅] Validation methods (type, qty, price validation)
+    - [✅] `get_account()` method (relationship)
+  - [✅] Create `Price` model class
+    - [✅] `__init__()` constructor
+    - [✅] `save()` method
+    - [✅] `delete()` method
+    - [✅] `update()` method
+    - [✅] `to_dict()` method
+    - [✅] `from_dict()` class method
+    - [✅] Validation methods
 
-- [ ] Create model query helpers
-  - [ ] `get_account_by_id(id)` - Get account by ID
-  - [ ] `get_account_by_name(name)` - Get account by name
-  - [ ] `get_all_accounts()` - Get all accounts
-  - [ ] `get_transaction_by_id(id)` - Get transaction by ID
-  - [ ] `get_transactions_by_account(account_id, start_date, end_date)` - Filter transactions
-  - [ ] `get_transactions_by_symbol(symbol, start_date, end_date)` - Filter by symbol
-  - [ ] `get_price(symbol, date)` - Get price for symbol/date
-  - [ ] `get_prices(symbol, start_date, end_date)` - Get price range
-  - [ ] `get_latest_price(symbol)` - Get most recent price
+- [✅] Create model query helpers
+  - [✅] `get_account_by_id(id)` - Get account by ID
+  - [✅] `get_account_by_name(name)` - Get account by name
+  - [✅] `get_all_accounts()` - Get all accounts
+  - [✅] `get_transaction_by_id(id)` - Get transaction by ID
+  - [✅] `get_transactions_by_account(account_id, start_date, end_date)` - Filter transactions
+  - [✅] `get_transactions_by_symbol(symbol, start_date, end_date)` - Filter by symbol
+  - [✅] `get_price(symbol, date)` - Get price for symbol/date
+  - [✅] `get_prices(symbol, start_date, end_date)` - Get price range
+  - [✅] `get_latest_price(symbol)` - Get most recent price
 
-- [ ] Write tests for models
-  - [ ] Test Account CRUD operations
-  - [ ] Test Transaction CRUD operations
-  - [ ] Test Price CRUD operations
-  - [ ] Test model validation
-  - [ ] Test query helpers
-  - [ ] Test relationships
+- [✅] Write tests for models
+  - [✅] Test Account CRUD operations
+  - [✅] Test Transaction CRUD operations
+  - [✅] Test Price CRUD operations
+  - [✅] Test model validation
+  - [✅] Test query helpers
+  - [✅] Test relationships
 
 ---
 
@@ -937,14 +937,14 @@ This document tracks the complete implementation of Finarius, a fully local, pri
 
 **Last Updated:** 2025-01-27
 **Current Phase:** Phase 1 - Project Foundation & Database Setup
-**Current Step:** 1.2 Database Models & ORM Layer
-**Overall Progress:** ~3% (Step 1.1 completed)
+**Current Step:** Phase 1 Complete - Ready for Phase 2
+**Overall Progress:** ~6% (Steps 1.1 and 1.2 completed)
 
 ### Quick Stats
 - Total Tasks: ~300+
-- Completed: ~10 (Step 1.1 fully completed)
+- Completed: ~20 (Steps 1.1 and 1.2 fully completed)
 - In Progress: 0
-- Not Started: ~290+
+- Not Started: ~280+
 
 ---
 
