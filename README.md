@@ -1,4 +1,4 @@
-# Personal Investment Analytics App
+# Finarius
 
 A fully local, privacy-first portfolio tracking and analytics application similar to Finary but fully offline and customizable.
 
@@ -48,15 +48,30 @@ pre-commit install
 
 ## Usage
 
-Run the Streamlit application:
+### Quick Start (Recommended)
+
+Simply run the provided script:
 ```bash
-streamlit run portfolio_app/app.py
+./run.sh
+```
+
+This will:
+- Automatically activate the virtual environment
+- Install dependencies if needed
+- Start the Streamlit app
+
+### Manual Start
+
+Alternatively, you can run manually:
+```bash
+source venv/bin/activate
+streamlit run finarius_app/app.py
 ```
 
 ## Project Structure
 
 ```
-portfolio_app/
+finarius_app/
  ├ app.py
  ├ db.sqlite
  ├ core/

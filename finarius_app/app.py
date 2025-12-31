@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.title("📊 Finarius - Personal Investment Analytics")
+st.title("📊 Finarius")
 st.markdown("A fully local, privacy-first portfolio tracking and analytics application.")
 
 st.info("🚧 Application under development. Core features coming soon!")

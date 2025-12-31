@@ -80,10 +80,10 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-addopts = "-v --cov=portfolio_app --cov-report=html --cov-report=term-missing"
+addopts = "-v --cov=finarius_app --cov-report=html --cov-report=term-missing"
 
 [tool.coverage.run]
-source = ["portfolio_app"]
+source = ["finarius_app"]
 omit = [
     "*/tests/*",
     "*/test_*.py",

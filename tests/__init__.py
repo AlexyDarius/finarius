@@ -1,2 +1,2 @@
-"""Test suite for portfolio app."""
+"""Test suite for Finarius."""
 
