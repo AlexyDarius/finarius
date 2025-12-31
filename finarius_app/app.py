@@ -17,9 +17,13 @@ from finarius_app.ui import (
     PAGE_PORTFOLIO,
     PAGE_ANALYTICS,
     PAGE_SETTINGS,
+    render_accounts_page,
+    render_transactions_page,
+    render_dashboard_page,
 )
 from finarius_app.ui.accounts import render_accounts_page
 from finarius_app.ui.transactions import render_transactions_page
+from finarius_app.ui.dashboard import render_dashboard_page
 
 # Configure logging
 logging.basicConfig(
@@ -80,10 +84,7 @@ def render_page_content(selected_page: str) -> None:
         st.error(f"Unknown page: {selected_page}")
 
 
-def render_dashboard_page() -> None:
-    """Render dashboard page (placeholder)."""
-    st.title("📊 Dashboard")
-    st.info("🚧 Dashboard page coming soon!")
+# render_dashboard_page is imported from finarius_app.ui.dashboard
 
 
 # render_accounts_page is imported from finarius_app.ui.accounts

@@ -451,62 +451,62 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Test CSV import
 
 ### 4.4 Dashboard UI
-- [ ] Create `finarius_app/ui/dashboard.py`
-  - [ ] `render_dashboard_page()` function
-    - [ ] Account selector (if multiple accounts)
-    - [ ] Date range selector
-    - [ ] Refresh button
+- [✅] Create `finarius_app/ui/dashboard/` package
+  - [✅] `render_dashboard_page()` function
+    - [✅] Account selector (if multiple accounts)
+    - [✅] Date range selector
+    - [✅] Refresh button
 
-- [ ] Portfolio overview section
-  - [ ] Total portfolio value (current)
-  - [ ] Total cost basis
-  - [ ] Total unrealized gains/losses
-  - [ ] Total realized gains/losses
-  - [ ] Total return (absolute and %)
-  - [ ] Number of positions
-  - [ ] Number of symbols
+- [✅] Portfolio overview section
+  - [✅] Total portfolio value (current)
+  - [✅] Total cost basis
+  - [✅] Total unrealized gains/losses
+  - [✅] Total realized gains/losses
+  - [✅] Total return (absolute and %)
+  - [✅] Number of positions
+  - [✅] Number of symbols
 
-- [ ] Performance metrics section
-  - [ ] CAGR display
-  - [ ] IRR display
-  - [ ] TWRR display
-  - [ ] Sharpe ratio (if implemented)
-  - [ ] Max drawdown (if implemented)
+- [✅] Performance metrics section
+  - [✅] CAGR display
+  - [✅] IRR display
+  - [✅] TWRR display
+  - [✅] Sharpe ratio (if implemented)
+  - [✅] Max drawdown (if implemented)
 
-- [ ] Charts section
-  - [ ] Portfolio value over time (Plotly line chart)
-    - [ ] Interactive
-    - [ ] Hover tooltips
-    - [ ] Date range selection
-  - [ ] Portfolio allocation (Pie chart)
-    - [ ] By symbol
-    - [ ] By sector (if data available)
-  - [ ] Returns distribution (Histogram)
-  - [ ] Performance vs benchmark (if implemented)
-  - [ ] Dividend income over time (Bar chart)
+- [✅] Charts section
+  - [✅] Portfolio value over time (Plotly line chart)
+    - [✅] Interactive
+    - [✅] Hover tooltips
+    - [✅] Date range selection
+  - [✅] Portfolio allocation (Pie chart)
+    - [✅] By symbol
+    - [✅] By sector (if data available)
+  - [✅] Returns distribution (Histogram)
+  - [✅] Performance vs benchmark (if implemented)
+  - [✅] Dividend income over time (Bar chart)
 
-- [ ] Top positions table
-  - [ ] Symbol
-  - [ ] Quantity
-  - [ ] Current price
-  - [ ] Cost basis
-  - [ ] Current value
-  - [ ] Unrealized gain/loss
-  - [ ] Return %
+- [✅] Top positions table
+  - [✅] Symbol
+  - [✅] Quantity
+  - [✅] Current price
+  - [✅] Cost basis
+  - [✅] Current value
+  - [✅] Unrealized gain/loss
+  - [✅] Return %
 
-- [ ] Recent transactions table
-  - [ ] Last 10 transactions
-  - [ ] Quick view
+- [✅] Recent transactions table
+  - [✅] Last 10 transactions
+  - [✅] Quick view
 
-- [ ] Dividend summary
-  - [ ] Total dividends (period)
-  - [ ] Dividend yield
-  - [ ] Top dividend payers
+- [✅] Dividend summary
+  - [✅] Total dividends (period)
+  - [✅] Dividend yield
+  - [✅] Top dividend payers
 
-- [ ] Write tests for dashboard UI
-  - [ ] Test data display
-  - [ ] Test chart rendering
-  - [ ] Test filtering
+- [✅] Write tests for dashboard UI
+  - [✅] Test data display
+  - [✅] Test chart rendering
+  - [✅] Test filtering
 
 ### 4.5 Portfolio Analytics UI
 - [ ] Create `finarius_app/ui/analytics.py`

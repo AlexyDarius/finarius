@@ -29,6 +29,7 @@ from .error_handler import (
 )
 from .accounts import render_accounts_page
 from .transactions import render_transactions_page
+from .dashboard import render_dashboard_page
 
 __all__ = [
     # Navigation
@@ -59,5 +60,7 @@ __all__ = [
     "render_accounts_page",
     # Transactions UI
     "render_transactions_page",
+    # Dashboard UI
+    "render_dashboard_page",
 ]
 
