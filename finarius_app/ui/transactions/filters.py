@@ -31,37 +31,66 @@ def render_filters(accounts: List[Account], db) -> dict:
             account_id = int(selected_account.split("(ID: ")[1].split(")")[0])
     
     with col2:
-        # Date range filter - default to wider range (1 year) to show more transactions
-        # This ensures transactions from earlier dates are visible by default
-        default_start_date = date.today() - timedelta(days=365)
-        default_end_date = date.today()
+        # Quick date range selector
+        date_preset_key = "transaction_date_preset"
+        if date_preset_key not in st.session_state:
+            st.session_state[date_preset_key] = "Last Year"
         
-        # Use session state to remember user's date range preference
-        # Initialize default value only if not already set by widget
-        date_range_key = "transaction_date_range"
-        default_value = (default_start_date, default_end_date)
+        date_preset = st.selectbox(
+            "Date Range",
+            options=["Custom", "YTD", "Last 7 Days", "Last 30 Days", "Last 90 Days", "Last Year"],
+            key=date_preset_key
+        )
         
-        # Get the value from session_state if it exists, otherwise use default
-        # The widget will manage its own state after first creation
-        if date_range_key in st.session_state:
-            # Widget already exists, use its value
-            date_range = st.date_input(
-                "Date Range",
-                value=st.session_state[date_range_key],
-                max_value=date.today(),
-                key=date_range_key
-            )
-        else:
-            # First time, set default value
-            date_range = st.date_input(
-                "Date Range",
-                value=default_value,
-                max_value=date.today(),
-                key=date_range_key
-            )
-        
-        start_date = date_range[0] if isinstance(date_range, tuple) else date_range
-        end_date = date_range[1] if isinstance(date_range, tuple) else date.today()
+        # Calculate date range based on preset
+        today = date.today()
+        if date_preset == "YTD":
+            start_date = date(today.year, 1, 1)
+            end_date = today
+        elif date_preset == "Last 7 Days":
+            start_date = today - timedelta(days=7)
+            end_date = today
+        elif date_preset == "Last 30 Days":
+            start_date = today - timedelta(days=30)
+            end_date = today
+        elif date_preset == "Last 90 Days":
+            start_date = today - timedelta(days=90)
+            end_date = today
+        elif date_preset == "Last Year":
+            start_date = today - timedelta(days=365)
+            end_date = today
+        else:  # Custom
+            # Date range filter - default to wider range (1 year) to show more transactions
+            # This ensures transactions from earlier dates are visible by default
+            default_start_date = date.today() - timedelta(days=365)
+            default_end_date = date.today()
+            
+            # Use session state to remember user's date range preference
+            # Initialize default value only if not already set by widget
+            date_range_key = "transaction_date_range"
+            default_value = (default_start_date, default_end_date)
+            
+            # Get the value from session_state if it exists, otherwise use default
+            # The widget will manage its own state after first creation
+            if date_range_key in st.session_state:
+                # Widget already exists, use its value
+                date_range = st.date_input(
+                    "Custom Date Range",
+                    value=st.session_state[date_range_key],
+                    max_value=date.today(),
+                    key=date_range_key
+                )
+            else:
+                # First time, set default value
+                date_range = st.date_input(
+                    "Custom Date Range",
+                    value=default_value,
+                    max_value=date.today(),
+                    key=date_range_key
+                )
+            
+            start_date = date_range[0] if isinstance(date_range, tuple) else date_range
+            end_date = date_range[1] if isinstance(date_range, tuple) else date.today()
     
     with col3:
         # Symbol filter
