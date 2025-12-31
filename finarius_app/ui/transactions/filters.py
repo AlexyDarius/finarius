@@ -34,22 +34,34 @@ def render_filters(accounts: List[Account], db) -> dict:
         # Date range filter - default to wider range (1 year) to show more transactions
         # This ensures transactions from earlier dates are visible by default
         default_start_date = date.today() - timedelta(days=365)
+        default_end_date = date.today()
         
         # Use session state to remember user's date range preference
+        # Initialize default value only if not already set by widget
         date_range_key = "transaction_date_range"
-        if date_range_key not in st.session_state:
-            st.session_state[date_range_key] = (default_start_date, date.today())
+        default_value = (default_start_date, default_end_date)
         
-        date_range = st.date_input(
-            "Date Range",
-            value=st.session_state[date_range_key],
-            max_value=date.today(),
-            key=date_range_key
-        )
+        # Get the value from session_state if it exists, otherwise use default
+        # The widget will manage its own state after first creation
+        if date_range_key in st.session_state:
+            # Widget already exists, use its value
+            date_range = st.date_input(
+                "Date Range",
+                value=st.session_state[date_range_key],
+                max_value=date.today(),
+                key=date_range_key
+            )
+        else:
+            # First time, set default value
+            date_range = st.date_input(
+                "Date Range",
+                value=default_value,
+                max_value=date.today(),
+                key=date_range_key
+            )
+        
         start_date = date_range[0] if isinstance(date_range, tuple) else date_range
         end_date = date_range[1] if isinstance(date_range, tuple) else date.today()
-        
-        # Note: Don't update session_state here - the widget handles it automatically
     
     with col3:
         # Symbol filter
