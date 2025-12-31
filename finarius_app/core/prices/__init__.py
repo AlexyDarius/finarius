@@ -18,6 +18,20 @@ from .cache import (
 )
 from .normalization import normalize_price_data
 from .downloader import PriceDownloader
+from .scheduler import (
+    get_all_portfolio_symbols,
+    get_last_update_time,
+    update_prices_for_symbol,
+    update_all_prices,
+    schedule_daily_updates,
+)
+from .analytics import (
+    get_price_history,
+    calculate_returns,
+    get_price_statistics,
+    calculate_daily_returns,
+    get_price_range,
+)
 
 __all__ = [
     # Exceptions
@@ -36,5 +50,17 @@ __all__ = [
     "normalize_price_data",
     # Main class
     "PriceDownloader",
+    # Scheduler
+    "get_all_portfolio_symbols",
+    "get_last_update_time",
+    "update_prices_for_symbol",
+    "update_all_prices",
+    "schedule_daily_updates",
+    # Analytics
+    "get_price_history",
+    "calculate_returns",
+    "get_price_statistics",
+    "calculate_daily_returns",
+    "get_price_range",
 ]
 

@@ -189,20 +189,23 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Mock yfinance for unit tests
 
 ### 2.2 Price Management Utilities
-- [ ] Create price update scheduler
-  - [ ] `update_all_prices()` - Update prices for all symbols in portfolio
-  - [ ] `update_prices_for_symbol(symbol)` - Update specific symbol
-  - [ ] `schedule_daily_updates()` - Schedule automatic updates
-  - [ ] Add last update tracking
+- [✅] Create price update scheduler (`scheduler.py`)
+  - [✅] `update_all_prices()` - Update prices for all symbols in portfolio
+  - [✅] `update_prices_for_symbol(symbol)` - Update specific symbol
+  - [✅] `schedule_daily_updates()` - Schedule automatic updates (placeholder)
+  - [✅] Add last update tracking
+  - [✅] `get_all_portfolio_symbols()` - Get unique symbols from transactions
 
-- [ ] Create price analytics helpers
-  - [ ] `get_price_history(symbol, days)` - Get price history
-  - [ ] `calculate_returns(symbol, start_date, end_date)` - Calculate returns
-  - [ ] `get_price_statistics(symbol, start_date, end_date)` - Get stats (min, max, avg, std)
+- [✅] Create price analytics helpers (`analytics.py`)
+  - [✅] `get_price_history(symbol, days)` - Get price history
+  - [✅] `calculate_returns(symbol, start_date, end_date)` - Calculate returns
+  - [✅] `get_price_statistics(symbol, start_date, end_date)` - Get stats (min, max, avg, std)
+  - [✅] `calculate_daily_returns()` - Calculate daily returns
+  - [✅] `get_price_range()` - Get price range information
 
-- [ ] Write tests for price utilities
-  - [ ] Test price update scheduler
-  - [ ] Test price analytics
+- [✅] Write tests for price utilities
+  - [✅] Test price update scheduler
+  - [✅] Test price analytics
 
 ---
 
