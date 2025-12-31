@@ -27,17 +27,33 @@ def render_top_positions(
     
     price_downloader = PriceDownloader(db=db)
     
-    if account_id is None:
-        from finarius_app.core.models import get_all_accounts
-        accounts = get_all_accounts(db)
-        if not accounts:
-            st.info("No accounts available")
-            return
-        account_id = accounts[0].id
-        st.info(f"📊 Showing positions for: {accounts[0].name}")
-    
     try:
-        breakdown = get_portfolio_breakdown(account_id, end_date, db, price_downloader)
+        if account_id is None:
+            # Aggregate positions across all accounts
+            from finarius_app.core.models import get_all_accounts
+            accounts = get_all_accounts(db)
+            if not accounts:
+                st.info("No accounts available")
+                return
+            
+            aggregated_breakdown = {}
+            for acc in accounts:
+                acc_breakdown = get_portfolio_breakdown(acc.id, end_date, db, price_downloader)
+                for symbol, data in acc_breakdown.items():
+                    if symbol not in aggregated_breakdown:
+                        aggregated_breakdown[symbol] = {
+                            "qty": 0.0,
+                            "cost_basis": 0.0,
+                            "current_value": 0.0,
+                            "unrealized_gain": 0.0,
+                        }
+                    aggregated_breakdown[symbol]["qty"] += data["qty"]
+                    aggregated_breakdown[symbol]["cost_basis"] += data["cost_basis"]
+                    aggregated_breakdown[symbol]["current_value"] += data["current_value"]
+                    aggregated_breakdown[symbol]["unrealized_gain"] += data["unrealized_gain"]
+            breakdown = aggregated_breakdown
+        else:
+            breakdown = get_portfolio_breakdown(account_id, end_date, db, price_downloader)
         
         if not breakdown:
             st.info("No positions found")

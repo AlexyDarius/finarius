@@ -28,21 +28,32 @@ def render_charts(
     
     price_downloader = PriceDownloader(db=db)
     
-    if account_id is None:
-        from finarius_app.core.models import get_all_accounts
-        accounts = get_all_accounts(db)
-        if not accounts:
-            st.info("No accounts available for charts")
-            return
-        account_id = accounts[0].id
-        st.info(f"📊 Showing charts for: {accounts[0].name}")
-    
     try:
         # Portfolio value over time
         st.markdown("#### Portfolio Value Over Time")
-        value_history = calculate_portfolio_value_over_time(
-            account_id, start_date, end_date, "daily", db, price_downloader
-        )
+        if account_id is None:
+            # Aggregate across all accounts
+            from finarius_app.core.models import get_all_accounts
+            accounts = get_all_accounts(db)
+            if not accounts:
+                st.info("No accounts available for charts")
+                return
+            
+            # Aggregate value history from all accounts
+            all_value_histories = {}
+            for acc in accounts:
+                acc_history = calculate_portfolio_value_over_time(
+                    acc.id, start_date, end_date, "daily", db, price_downloader
+                )
+                for date, value in acc_history.items():
+                    if date not in all_value_histories:
+                        all_value_histories[date] = 0.0
+                    all_value_histories[date] += value
+            value_history = all_value_histories
+        else:
+            value_history = calculate_portfolio_value_over_time(
+                account_id, start_date, end_date, "daily", db, price_downloader
+            )
         
         if value_history:
             df = pd.DataFrame([
@@ -67,7 +78,28 @@ def render_charts(
         
         # Portfolio allocation pie chart
         st.markdown("#### Portfolio Allocation")
-        breakdown = get_portfolio_breakdown(account_id, end_date, db, price_downloader)
+        if account_id is None:
+            # Aggregate breakdown across all accounts
+            from finarius_app.core.models import get_all_accounts
+            accounts = get_all_accounts(db)
+            aggregated_breakdown = {}
+            for acc in accounts:
+                acc_breakdown = get_portfolio_breakdown(acc.id, end_date, db, price_downloader)
+                for symbol, data in acc_breakdown.items():
+                    if symbol not in aggregated_breakdown:
+                        aggregated_breakdown[symbol] = {
+                            "qty": 0.0,
+                            "cost_basis": 0.0,
+                            "current_value": 0.0,
+                            "unrealized_gain": 0.0,
+                        }
+                    aggregated_breakdown[symbol]["qty"] += data["qty"]
+                    aggregated_breakdown[symbol]["cost_basis"] += data["cost_basis"]
+                    aggregated_breakdown[symbol]["current_value"] += data["current_value"]
+                    aggregated_breakdown[symbol]["unrealized_gain"] += data["unrealized_gain"]
+            breakdown = aggregated_breakdown
+        else:
+            breakdown = get_portfolio_breakdown(account_id, end_date, db, price_downloader)
         
         if breakdown:
             allocation_data = []
@@ -98,7 +130,17 @@ def render_charts(
         
         # Dividend income over time
         st.markdown("#### Dividend Income Over Time")
-        dividend_history = get_dividend_history(account_id, start_date, end_date, db)
+        if account_id is None:
+            # Aggregate dividends across all accounts
+            from finarius_app.core.models import get_all_accounts
+            accounts = get_all_accounts(db)
+            all_dividends = []
+            for acc in accounts:
+                acc_dividends = get_dividend_history(acc.id, start_date, end_date, db)
+                all_dividends.extend(acc_dividends)
+            dividend_history = all_dividends
+        else:
+            dividend_history = get_dividend_history(account_id, start_date, end_date, db)
         
         if dividend_history:
             # Group by date

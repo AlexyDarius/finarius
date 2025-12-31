@@ -34,20 +34,65 @@ def render_gains_analysis(
     
     price_downloader = PriceDownloader(db=db)
     
-    if account_id is None:
-        from finarius_app.core.models import get_all_accounts
-        accounts = get_all_accounts(db)
-        if not accounts:
-            st.info("No accounts available")
-            return
-        account_id = accounts[0].id
-        st.info(f"📊 Showing gains analysis for: {accounts[0].name}")
-    
     try:
-        # Calculate totals
-        realized = calculate_realized_gains(account_id, start_date, end_date, db)
-        unrealized = calculate_unrealized_gains(account_id, end_date, db, price_downloader)
-        total_pnl = realized + unrealized
+        if account_id is None:
+            # Aggregate gains across all accounts
+            from finarius_app.core.models import get_all_accounts
+            accounts = get_all_accounts(db)
+            if not accounts:
+                st.info("No accounts available")
+                return
+            
+            realized = 0.0
+            unrealized = 0.0
+            realized_by_symbol = {}
+            unrealized_by_symbol = {}
+            realized_history = {}
+            unrealized_history = {}
+            
+            for acc in accounts:
+                acc_realized = calculate_realized_gains(acc.id, start_date, end_date, db)
+                realized += acc_realized
+                
+                acc_unrealized = calculate_unrealized_gains(acc.id, end_date, db, price_downloader)
+                unrealized += acc_unrealized
+                
+                # Aggregate by symbol
+                acc_realized_by_symbol = get_realized_gains_by_symbol(acc.id, start_date, end_date, db)
+                for symbol, gains in acc_realized_by_symbol.items():
+                    if symbol not in realized_by_symbol:
+                        realized_by_symbol[symbol] = 0.0
+                    realized_by_symbol[symbol] += gains
+                
+                acc_unrealized_by_symbol = get_unrealized_gains_by_symbol(acc.id, end_date, db, price_downloader)
+                for symbol, gains in acc_unrealized_by_symbol.items():
+                    if symbol not in unrealized_by_symbol:
+                        unrealized_by_symbol[symbol] = 0.0
+                    unrealized_by_symbol[symbol] += gains
+                
+                # Aggregate histories
+                acc_realized_hist = get_realized_gains_history(acc.id, start_date, end_date, db)
+                for date, value in acc_realized_hist.items():
+                    if date not in realized_history:
+                        realized_history[date] = 0.0
+                    realized_history[date] += value
+                
+                acc_unrealized_hist = get_unrealized_gains_history(acc.id, start_date, end_date, db, price_downloader)
+                for date, value in acc_unrealized_hist.items():
+                    if date not in unrealized_history:
+                        unrealized_history[date] = 0.0
+                    unrealized_history[date] += value
+            
+            total_pnl = realized + unrealized
+        else:
+            # Single account
+            realized = calculate_realized_gains(account_id, start_date, end_date, db)
+            unrealized = calculate_unrealized_gains(account_id, end_date, db, price_downloader)
+            total_pnl = realized + unrealized
+            realized_by_symbol = get_realized_gains_by_symbol(account_id, start_date, end_date, db)
+            unrealized_by_symbol = get_unrealized_gains_by_symbol(account_id, end_date, db, price_downloader)
+            realized_history = get_realized_gains_history(account_id, start_date, end_date, db)
+            unrealized_history = get_unrealized_gains_history(account_id, start_date, end_date, db, price_downloader)
         
         # Display summary
         col1, col2, col3 = st.columns(3)
@@ -60,7 +105,6 @@ def render_gains_analysis(
         
         # Realized gains breakdown by symbol
         st.markdown("#### Realized Gains by Symbol")
-        realized_by_symbol = get_realized_gains_by_symbol(account_id, start_date, end_date, db)
         
         if realized_by_symbol:
             realized_data = [
@@ -74,7 +118,6 @@ def render_gains_analysis(
         
         # Unrealized gains breakdown by symbol
         st.markdown("#### Unrealized Gains by Symbol")
-        unrealized_by_symbol = get_unrealized_gains_by_symbol(account_id, end_date, db, price_downloader)
         
         if unrealized_by_symbol:
             unrealized_data = [
@@ -88,8 +131,6 @@ def render_gains_analysis(
         
         # Combined PnL chart
         st.markdown("#### Gains/Losses Over Time")
-        realized_history = get_realized_gains_history(account_id, start_date, end_date, db)
-        unrealized_history = get_unrealized_gains_history(account_id, start_date, end_date, db, price_downloader)
         
         if realized_history or unrealized_history:
             # Combine histories (sample weekly for performance)
