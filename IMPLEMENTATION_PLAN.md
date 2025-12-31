@@ -263,75 +263,77 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Test edge cases (empty portfolio, single transaction, etc.)
 
 ### 3.2 Performance Metrics
-- [ ] Create `finarius_app/core/metrics.py`
-  - [ ] Create `MetricsCalculator` class
-    - [ ] Initialize with portfolio engine
-    - [ ] Initialize with database connection
+- [✅] Create `finarius_app/core/metrics/` (modularized structure)
+  - [✅] Create `MetricsCalculator` class (`metrics.py`)
+    - [✅] Initialize with portfolio engine
+    - [✅] Initialize with database connection
+    - [✅] Add caching for metrics
+  - [✅] Create `__init__.py` for module exports (following codebase pattern)
 
-- [ ] Implement realized gains/losses
-  - [ ] `calculate_realized_gains(account_id, start_date, end_date)` - Realized PnL
-    - [ ] Track cost basis for sold positions
-    - [ ] Calculate gain/loss per sale
-    - [ ] Include fees
-  - [ ] `get_realized_gains_by_symbol(account_id, start_date, end_date)` - Breakdown by symbol
-  - [ ] `get_realized_gains_history(account_id, start_date, end_date)` - Over time
+- [✅] Implement realized gains/losses (`realized_gains.py`)
+  - [✅] `calculate_realized_gains(account_id, start_date, end_date)` - Realized PnL
+    - [✅] Track cost basis for sold positions
+    - [✅] Calculate gain/loss per sale
+    - [✅] Include fees
+  - [✅] `get_realized_gains_by_symbol(account_id, start_date, end_date)` - Breakdown by symbol
+  - [✅] `get_realized_gains_history(account_id, start_date, end_date)` - Over time
 
-- [ ] Implement unrealized gains/losses
-  - [ ] `calculate_unrealized_gains(account_id, date)` - Unrealized PnL
-    - [ ] Current positions
-    - [ ] Current market prices
-    - [ ] Cost basis (PRU)
-  - [ ] `get_unrealized_gains_by_symbol(account_id, date)` - Breakdown by symbol
-  - [ ] `get_unrealized_gains_history(account_id, start_date, end_date)` - Over time
+- [✅] Implement unrealized gains/losses (`unrealized_gains.py`)
+  - [✅] `calculate_unrealized_gains(account_id, date)` - Unrealized PnL
+    - [✅] Current positions
+    - [✅] Current market prices
+    - [✅] Cost basis (PRU)
+  - [✅] `get_unrealized_gains_by_symbol(account_id, date)` - Breakdown by symbol
+  - [✅] `get_unrealized_gains_history(account_id, start_date, end_date)` - Over time
 
-- [ ] Implement total return calculation
-  - [ ] `calculate_total_return(account_id, start_date, end_date)` - Total return
-    - [ ] Realized + Unrealized gains
-    - [ ] Include dividends
-  - [ ] `calculate_total_return_percentage(account_id, start_date, end_date)` - Return %
+- [✅] Implement total return calculation (`returns.py`)
+  - [✅] `calculate_total_return(account_id, start_date, end_date)` - Total return
+    - [✅] Realized + Unrealized gains
+    - [✅] Include dividends
+  - [✅] `calculate_total_return_percentage(account_id, start_date, end_date)` - Return %
 
-- [ ] Implement CAGR (Compound Annual Growth Rate)
-  - [ ] `calculate_cagr(account_id, start_date, end_date)` - CAGR calculation
-    - [ ] Formula: (End Value / Start Value)^(1/years) - 1
-    - [ ] Handle different time periods
-    - [ ] Handle negative returns
-  - [ ] `get_cagr_history(account_id, start_date, end_date)` - CAGR over time
+- [✅] Implement CAGR (Compound Annual Growth Rate) (`returns.py`)
+  - [✅] `calculate_cagr(account_id, start_date, end_date)` - CAGR calculation
+    - [✅] Formula: (End Value / Start Value)^(1/years) - 1
+    - [✅] Handle different time periods
+    - [✅] Handle negative returns
+  - [✅] `get_cagr_history(account_id, start_date, end_date)` - CAGR over time
 
-- [ ] Implement IRR (Internal Rate of Return)
-  - [ ] `calculate_irr(account_id, start_date, end_date)` - IRR calculation
-    - [ ] Use numpy financial functions or custom implementation
-    - [ ] Handle cash flows (deposits, withdrawals)
-    - [ ] Handle multiple cash flows
-  - [ ] `get_irr_history(account_id, start_date, end_date)` - IRR over time
+- [✅] Implement IRR (Internal Rate of Return) (`returns.py`)
+  - [✅] `calculate_irr(account_id, start_date, end_date)` - IRR calculation
+    - [✅] Custom Newton-Raphson implementation
+    - [✅] Handle cash flows (deposits, withdrawals)
+    - [✅] Handle multiple cash flows
+  - [✅] `get_irr_history(account_id, start_date, end_date)` - IRR over time
 
-- [ ] Implement TWRR (Time-Weighted Rate of Return)
-  - [ ] `calculate_twrr(account_id, start_date, end_date)` - TWRR calculation
-    - [ ] Handle cash flows properly
-    - [ ] Calculate period returns
-    - [ ] Chain period returns
-  - [ ] `get_twrr_history(account_id, start_date, end_date)` - TWRR over time
+- [✅] Implement TWRR (Time-Weighted Rate of Return) (`returns.py`)
+  - [✅] `calculate_twrr(account_id, start_date, end_date)` - TWRR calculation
+    - [✅] Handle cash flows properly
+    - [✅] Calculate period returns
+    - [✅] Chain period returns
+  - [✅] `get_twrr_history(account_id, start_date, end_date)` - TWRR over time
 
-- [ ] Implement dividend analytics
-  - [ ] `get_dividend_history(account_id, start_date, end_date)` - All dividends
-  - [ ] `calculate_dividend_yield(account_id, date)` - Dividend yield
-  - [ ] `calculate_dividend_income(account_id, start_date, end_date)` - Total dividend income
-  - [ ] `get_dividend_by_symbol(account_id, start_date, end_date)` - Breakdown by symbol
-  - [ ] `calculate_dividend_yield_by_symbol(symbol, account_id, date)` - Yield per symbol
+- [✅] Implement dividend analytics (`dividends.py`)
+  - [✅] `get_dividend_history(account_id, start_date, end_date)` - All dividends
+  - [✅] `calculate_dividend_yield(account_id, date)` - Dividend yield
+  - [✅] `calculate_dividend_income(account_id, start_date, end_date)` - Total dividend income
+  - [✅] `get_dividend_by_symbol(account_id, start_date, end_date)` - Breakdown by symbol
+  - [✅] `calculate_dividend_yield_by_symbol(symbol, account_id, date)` - Yield per symbol
 
-- [ ] Implement additional metrics
-  - [ ] `calculate_sharpe_ratio(account_id, start_date, end_date, risk_free_rate)` - Sharpe ratio
-  - [ ] `calculate_max_drawdown(account_id, start_date, end_date)` - Maximum drawdown
-  - [ ] `calculate_volatility(account_id, start_date, end_date)` - Portfolio volatility
-  - [ ] `calculate_beta(account_id, benchmark_symbol, start_date, end_date)` - Beta vs benchmark
+- [✅] Implement additional metrics (`risk_metrics.py`)
+  - [✅] `calculate_sharpe_ratio(account_id, start_date, end_date, risk_free_rate)` - Sharpe ratio
+  - [✅] `calculate_max_drawdown(account_id, start_date, end_date)` - Maximum drawdown
+  - [✅] `calculate_volatility(account_id, start_date, end_date)` - Portfolio volatility
+  - [✅] `calculate_beta(account_id, benchmark_symbol, start_date, end_date)` - Beta vs benchmark
 
-- [ ] Write tests for metrics
-  - [ ] Test realized gains calculation
-  - [ ] Test unrealized gains calculation
-  - [ ] Test CAGR calculation (known test cases)
-  - [ ] Test IRR calculation (known test cases)
-  - [ ] Test TWRR calculation (known test cases)
-  - [ ] Test dividend analytics
-  - [ ] Test edge cases
+- [✅] Write tests for metrics
+  - [✅] Test realized gains calculation
+  - [✅] Test unrealized gains calculation
+  - [✅] Test CAGR calculation (known test cases)
+  - [✅] Test IRR calculation (known test cases)
+  - [✅] Test TWRR calculation (known test cases)
+  - [✅] Test dividend analytics
+  - [✅] Test edge cases
 
 ---
 

@@ -2,6 +2,7 @@
 
 from . import prices
 from . import engine
+from . import metrics
 
-__all__ = ["prices", "engine"]
+__all__ = ["prices", "engine", "metrics"]
 
