@@ -15,6 +15,19 @@ from .exceptions import (
     ConfigurationError,
     CalculationError,
 )
+from .utils import (
+    parse_date,
+    format_date,
+    get_date_range,
+    format_currency,
+    format_percentage,
+    round_decimal,
+    validate_symbol,
+    validate_date,
+    validate_amount,
+    safe_divide,
+    calculate_percentage_change,
+)
 
 __all__ = [
     "prices",
@@ -33,5 +46,20 @@ __all__ = [
     "InsufficientDataError",
     "ConfigurationError",
     "CalculationError",
+    # Date utilities
+    "parse_date",
+    "format_date",
+    "get_date_range",
+    # Number utilities
+    "format_currency",
+    "format_percentage",
+    "round_decimal",
+    # Validation utilities
+    "validate_symbol",
+    "validate_date",
+    "validate_amount",
+    # Data utilities
+    "safe_divide",
+    "calculate_percentage_change",
 ]
 
