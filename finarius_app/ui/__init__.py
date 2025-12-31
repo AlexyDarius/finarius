@@ -27,6 +27,7 @@ from .error_handler import (
     error_handler,
     safe_execute,
 )
+from .accounts import render_accounts_page
 
 __all__ = [
     # Navigation
@@ -53,5 +54,7 @@ __all__ = [
     "handle_error",
     "error_handler",
     "safe_execute",
+    # Accounts UI
+    "render_accounts_page",
 ]
 

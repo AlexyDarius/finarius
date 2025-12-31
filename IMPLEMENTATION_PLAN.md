@@ -358,31 +358,31 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [✅] Add error handling wrapper
 
 ### 4.2 Accounts Management UI
-- [ ] Create `finarius_app/ui/accounts.py`
-  - [ ] `render_accounts_page()` function
-    - [ ] Display list of accounts (table)
-      - [ ] Account name
-      - [ ] Currency
-      - [ ] Created date
-      - [ ] Actions (Edit, Delete)
-    - [ ] Add account form
-      - [ ] Name input
-      - [ ] Currency selector
-      - [ ] Validation
-      - [ ] Submit button
-    - [ ] Edit account modal/form
-    - [ ] Delete confirmation dialog
-    - [ ] Success/error messages
-  - [ ] Add account statistics
-    - [ ] Total accounts
-    - [ ] Total value per account
-    - [ ] Account breakdown chart
+- [✅] Create `finarius_app/ui/accounts.py`
+  - [✅] `render_accounts_page()` function
+    - [✅] Display list of accounts (table)
+      - [✅] Account name
+      - [✅] Currency
+      - [✅] Created date
+      - [✅] Actions (Edit, Delete)
+    - [✅] Add account form
+      - [✅] Name input
+      - [✅] Currency selector
+      - [✅] Validation
+      - [✅] Submit button
+    - [✅] Edit account modal/form
+    - [✅] Delete confirmation dialog
+    - [✅] Success/error messages
+  - [✅] Add account statistics
+    - [✅] Total accounts
+    - [✅] Total value per account
+    - [✅] Account breakdown chart
 
-- [ ] Write tests for accounts UI
-  - [ ] Test account creation
-  - [ ] Test account editing
-  - [ ] Test account deletion
-  - [ ] Test validation
+- [✅] Write tests for accounts UI
+  - [✅] Test account creation
+  - [✅] Test account editing
+  - [✅] Test account deletion
+  - [✅] Test validation
 
 ### 4.3 Transactions Management UI
 - [ ] Create `finarius_app/ui/transactions.py`

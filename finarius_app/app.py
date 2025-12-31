@@ -18,6 +18,7 @@ from finarius_app.ui import (
     PAGE_ANALYTICS,
     PAGE_SETTINGS,
 )
+from finarius_app.ui.accounts import render_accounts_page
 
 # Configure logging
 logging.basicConfig(
@@ -84,10 +85,7 @@ def render_dashboard_page() -> None:
     st.info("🚧 Dashboard page coming soon!")
 
 
-def render_accounts_page() -> None:
-    """Render accounts page (placeholder)."""
-    st.title("🏦 Accounts")
-    st.info("🚧 Accounts page coming soon!")
+# render_accounts_page is imported from finarius_app.ui.accounts
 
 
 def render_transactions_page() -> None:
@@ -131,4 +129,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
