@@ -576,37 +576,37 @@ This document tracks the complete implementation of Finarius, a fully local, pri
 ## Phase 5: Configuration & Utilities
 
 ### 5.1 Configuration Management
-- [ ] Create `finarius_app/core/config.py`
-  - [ ] Create `Config` class
-    - [ ] Load from config file (YAML/JSON/TOML)
-    - [ ] Environment variable support
-    - [ ] Default values
-  - [ ] Configuration options
-    - [ ] Database path
-    - [ ] Default currency
-    - [ ] Price update frequency
-    - [ ] Cache settings
-    - [ ] Logging level
-    - [ ] Date format
-    - [ ] Number format
+- [✅] Create `finarius_app/core/config.py`
+  - [✅] Create `Config` class
+    - [✅] Load from config file (YAML/JSON/TOML)
+    - [✅] Environment variable support
+    - [✅] Default values
+  - [✅] Configuration options
+    - [✅] Database path
+    - [✅] Default currency
+    - [✅] Price update frequency
+    - [✅] Cache settings
+    - [✅] Logging level
+    - [✅] Date format
+    - [✅] Number format
 
-- [ ] Create `config.yaml` or `config.toml`
-  - [ ] Default configuration
-  - [ ] Documentation comments
+- [✅] Create `config.yaml` or `config.toml`
+  - [✅] Default configuration
+  - [✅] Documentation comments
 
-- [ ] Write tests for configuration
-  - [ ] Test config loading
-  - [ ] Test environment variable override
-  - [ ] Test default values
+- [✅] Write tests for configuration
+  - [✅] Test config loading
+  - [✅] Test environment variable override
+  - [✅] Test default values
 
 ### 5.2 Logging Setup
-- [ ] Create `finarius_app/core/logger.py`
-  - [ ] Configure logging
-    - [ ] Log level (INFO, DEBUG, etc.)
-    - [ ] Log format
-    - [ ] Log file output (optional)
-    - [ ] Console output
-  - [ ] Create logger instances for modules
+- [✅] Create `finarius_app/core/logger.py`
+  - [✅] Configure logging
+    - [✅] Log level (INFO, DEBUG, etc.)
+    - [✅] Log format
+    - [✅] Log file output (optional)
+    - [✅] Console output
+  - [✅] Create logger instances for modules
   - [ ] Add structured logging (optional)
 
 - [ ] Add logging throughout application
@@ -617,13 +617,15 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [ ] Errors and exceptions
 
 ### 5.3 Error Handling
-- [ ] Create `finarius_app/core/exceptions.py`
-  - [ ] `FinariusException` base class
-  - [ ] `DatabaseError` exception
-  - [ ] `PriceDownloadError` exception
-  - [ ] `ValidationError` exception
-  - [ ] `SymbolNotFoundError` exception
-  - [ ] `InsufficientDataError` exception
+- [✅] Create `finarius_app/core/exceptions.py`
+  - [✅] `FinariusException` base class
+  - [✅] `DatabaseError` exception
+  - [✅] `PriceDownloadError` exception
+  - [✅] `ValidationError` exception
+  - [✅] `SymbolNotFoundError` exception
+  - [✅] `InsufficientDataError` exception
+  - [✅] `ConfigurationError` exception (bonus)
+  - [✅] `CalculationError` exception (bonus)
 
 - [ ] Add error handling throughout
   - [ ] Database operations
@@ -631,32 +633,32 @@ This document tracks the complete implementation of Finarius, a fully local, pri
   - [ ] Calculations
   - [ ] UI components
 
-- [ ] Add user-friendly error messages
-  - [ ] Display in UI
-  - [ ] Log detailed errors
+- [✅] Add user-friendly error messages
+  - [✅] Display in UI
+  - [✅] Log detailed errors
 
 ### 5.4 Utility Functions
-- [ ] Create `finarius_app/core/utils.py`
-  - [ ] Date utilities
-    - [ ] `parse_date(date_string)` - Parse date string
-    - [ ] `format_date(date)` - Format date
-    - [ ] `get_date_range(start, end)` - Generate date range
-  - [ ] Number utilities
-    - [ ] `format_currency(amount, currency)` - Format currency
-    - [ ] `format_percentage(value)` - Format percentage
-    - [ ] `round_decimal(value, decimals)` - Round to decimals
-  - [ ] Validation utilities
-    - [ ] `validate_symbol(symbol)` - Validate symbol
-    - [ ] `validate_date(date)` - Validate date
-    - [ ] `validate_amount(amount)` - Validate amount
-  - [ ] Data utilities
-    - [ ] `safe_divide(numerator, denominator)` - Safe division
-    - [ ] `calculate_percentage_change(old, new)` - Percentage change
+- [✅] Create `finarius_app/core/utils.py`
+  - [✅] Date utilities
+    - [✅] `parse_date(date_string)` - Parse date string
+    - [✅] `format_date(date)` - Format date
+    - [✅] `get_date_range(start, end)` - Generate date range
+  - [✅] Number utilities
+    - [✅] `format_currency(amount, currency)` - Format currency
+    - [✅] `format_percentage(value)` - Format percentage
+    - [✅] `round_decimal(value, decimals)` - Round to decimals
+  - [✅] Validation utilities
+    - [✅] `validate_symbol(symbol)` - Validate symbol
+    - [✅] `validate_date(date)` - Validate date
+    - [✅] `validate_amount(amount)` - Validate amount
+  - [✅] Data utilities
+    - [✅] `safe_divide(numerator, denominator)` - Safe division
+    - [✅] `calculate_percentage_change(old, new)` - Percentage change
 
-- [ ] Write tests for utilities
-  - [ ] Test date utilities
-  - [ ] Test number utilities
-  - [ ] Test validation utilities
+- [✅] Write tests for utilities
+  - [✅] Test date utilities
+  - [✅] Test number utilities
+  - [✅] Test validation utilities
 
 ---
 
