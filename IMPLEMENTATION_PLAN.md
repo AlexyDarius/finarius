@@ -212,54 +212,55 @@ This document tracks the complete implementation of Finarius, a fully local, pri
 ## Phase 3: Core Portfolio Engine
 
 ### 3.1 Portfolio Reconstruction Engine
-- [ ] Create `finarius_app/core/engine.py`
-  - [ ] Create `PortfolioEngine` class
-    - [ ] Initialize with database connection
-    - [ ] Initialize with price downloader
-    - [ ] Add caching for portfolio state
+- [✅] Create `finarius_app/core/engine/` (modularized structure)
+  - [✅] Create `PortfolioEngine` class (`engine.py`)
+    - [✅] Initialize with database connection
+    - [✅] Initialize with price downloader
+    - [✅] Add caching for portfolio state
+  - [✅] Create `__init__.py` for module exports (following codebase pattern)
 
-- [ ] Implement position tracking
-  - [ ] `get_positions(account_id, date)` - Get positions at specific date
-    - [ ] Calculate from transactions
-    - [ ] Handle BUY/SELL transactions
-    - [ ] Handle stock splits
-    - [ ] Return dict: `{symbol: {qty, cost_basis, avg_price}}`
-  - [ ] `get_all_positions(date)` - Get positions across all accounts
-  - [ ] `get_current_positions(account_id)` - Get current positions
-  - [ ] `get_position_history(symbol, account_id, start_date, end_date)` - Position over time
+- [✅] Implement position tracking (`positions.py`)
+  - [✅] `get_positions(account_id, date)` - Get positions at specific date
+    - [✅] Calculate from transactions
+    - [✅] Handle BUY/SELL transactions
+    - [✅] Handle stock splits (prepared for future implementation)
+    - [✅] Return dict: `{symbol: {qty, cost_basis, avg_price}}`
+  - [✅] `get_all_positions(date)` - Get positions across all accounts
+  - [✅] `get_current_positions(account_id)` - Get current positions
+  - [✅] `get_position_history(symbol, account_id, start_date, end_date)` - Position over time
 
-- [ ] Implement PRU (Prix de Revient Unitaire / Average Cost) calculation
-  - [ ] `calculate_pru(symbol, account_id, date)` - Calculate average cost
-    - [ ] Handle FIFO method
-    - [ ] Handle multiple purchases
-    - [ ] Handle partial sales
-    - [ ] Include fees in cost basis
-  - [ ] `get_pru_history(symbol, account_id, start_date, end_date)` - PRU over time
+- [✅] Implement PRU (Prix de Revient Unitaire / Average Cost) calculation (`pru.py`)
+  - [✅] `calculate_pru(symbol, account_id, date)` - Calculate average cost
+    - [✅] Handle FIFO method
+    - [✅] Handle multiple purchases
+    - [✅] Handle partial sales
+    - [✅] Include fees in cost basis
+  - [✅] `get_pru_history(symbol, account_id, start_date, end_date)` - PRU over time
 
-- [ ] Implement portfolio value calculation
-  - [ ] `calculate_portfolio_value(account_id, date)` - Portfolio value at date
-    - [ ] Get positions
-    - [ ] Get prices for all symbols
-    - [ ] Calculate total value
-  - [ ] `calculate_portfolio_value_over_time(account_id, start_date, end_date)` - Value history
-    - [ ] Daily/weekly/monthly snapshots
-    - [ ] Efficient calculation
-  - [ ] `get_portfolio_breakdown(account_id, date)` - Breakdown by symbol
+- [✅] Implement portfolio value calculation (`portfolio_value.py`)
+  - [✅] `calculate_portfolio_value(account_id, date)` - Portfolio value at date
+    - [✅] Get positions
+    - [✅] Get prices for all symbols
+    - [✅] Calculate total value
+  - [✅] `calculate_portfolio_value_over_time(account_id, start_date, end_date)` - Value history
+    - [✅] Daily/weekly/monthly snapshots
+    - [✅] Efficient calculation
+  - [✅] `get_portfolio_breakdown(account_id, date)` - Breakdown by symbol
 
-- [ ] Implement cash flow tracking
-  - [ ] `get_cash_flows(account_id, start_date, end_date)` - Get all cash flows
-    - [ ] DEPOSIT transactions
-    - [ ] WITHDRAW transactions
-    - [ ] DIVIDEND transactions
-  - [ ] `calculate_net_cash_flow(account_id, start_date, end_date)` - Net cash flow
-  - [ ] `get_cash_balance(account_id, date)` - Cash balance at date
+- [✅] Implement cash flow tracking (`cash_flows.py`)
+  - [✅] `get_cash_flows(account_id, start_date, end_date)` - Get all cash flows
+    - [✅] DEPOSIT transactions
+    - [✅] WITHDRAW transactions
+    - [✅] DIVIDEND transactions
+  - [✅] `calculate_net_cash_flow(account_id, start_date, end_date)` - Net cash flow
+  - [✅] `get_cash_balance(account_id, date)` - Cash balance at date
 
-- [ ] Write tests for portfolio engine
-  - [ ] Test position tracking
-  - [ ] Test PRU calculation
-  - [ ] Test portfolio value calculation
-  - [ ] Test cash flow tracking
-  - [ ] Test edge cases (empty portfolio, single transaction, etc.)
+- [✅] Write tests for portfolio engine
+  - [✅] Test position tracking
+  - [✅] Test PRU calculation
+  - [✅] Test portfolio value calculation
+  - [✅] Test cash flow tracking
+  - [✅] Test edge cases (empty portfolio, single transaction, etc.)
 
 ### 3.2 Performance Metrics
 - [ ] Create `finarius_app/core/metrics.py`
