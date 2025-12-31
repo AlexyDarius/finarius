@@ -30,21 +30,48 @@ def render_dividend_analytics(
     """
     st.subheader("💰 Dividend Analytics")
     
-    if account_id is None:
-        from finarius_app.core.models import get_all_accounts
-        accounts = get_all_accounts(db)
-        if not accounts:
-            st.info("No accounts available")
-            return
-        account_id = accounts[0].id
-        st.info(f"📊 Showing dividend analytics for: {accounts[0].name}")
-    
     try:
-        # Calculate dividend metrics
-        total_dividends = calculate_dividend_income(account_id, start_date, end_date, db)
-        dividend_yield = calculate_dividend_yield(account_id, end_date, db)
-        dividend_by_symbol = get_dividend_by_symbol(account_id, start_date, end_date, db)
-        dividend_history = get_dividend_history(account_id, start_date, end_date, db)
+        if account_id is None:
+            # Aggregate dividends across all accounts
+            from finarius_app.core.models import get_all_accounts
+            accounts = get_all_accounts(db)
+            if not accounts:
+                st.info("No accounts available")
+                return
+            
+            total_dividends = 0.0
+            total_portfolio_value = 0.0
+            dividend_by_symbol = {}
+            dividend_history = []
+            
+            for acc in accounts:
+                acc_dividends = calculate_dividend_income(acc.id, start_date, end_date, db)
+                total_dividends += acc_dividends
+                
+                # Get portfolio value for yield calculation
+                from finarius_app.core.engine import calculate_portfolio_value
+                acc_value = calculate_portfolio_value(acc.id, end_date, db)
+                total_portfolio_value += acc_value
+                
+                # Aggregate by symbol
+                acc_by_symbol = get_dividend_by_symbol(acc.id, start_date, end_date, db)
+                for symbol, amount in acc_by_symbol.items():
+                    if symbol not in dividend_by_symbol:
+                        dividend_by_symbol[symbol] = 0.0
+                    dividend_by_symbol[symbol] += amount
+                
+                # Aggregate history
+                acc_history = get_dividend_history(acc.id, start_date, end_date, db)
+                dividend_history.extend(acc_history)
+            
+            # Calculate aggregate dividend yield
+            dividend_yield = (total_dividends / total_portfolio_value) if total_portfolio_value > 0 else None
+        else:
+            # Single account
+            total_dividends = calculate_dividend_income(account_id, start_date, end_date, db)
+            dividend_yield = calculate_dividend_yield(account_id, end_date, db)
+            dividend_by_symbol = get_dividend_by_symbol(account_id, start_date, end_date, db)
+            dividend_history = get_dividend_history(account_id, start_date, end_date, db)
         
         # Display summary
         col1, col2 = st.columns(2)
